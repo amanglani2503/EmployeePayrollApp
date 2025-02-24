@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/employees")
-class EmployeePayrollController {
+public class EmployeeController {
     @GetMapping("/test")
     public String testAPI() {
         return "Employee Payroll REST API is working!";
