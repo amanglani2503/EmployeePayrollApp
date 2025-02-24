@@ -61,7 +61,15 @@
 				<artifactId>mariadb-java-client</artifactId>
 				<scope>runtime</scope>
 			</dependency>
-		</dependencies>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.30</version>  <!-- Check for the latest version -->
+			<scope>provided</scope>
+		</dependency>
+
+	</dependencies>
 
 	<build>
 		<plugins>
