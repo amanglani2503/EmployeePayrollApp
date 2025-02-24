@@ -1,5 +1,6 @@
 package com.bridgelabz.employeepayrollapp.controller;
 
+import com.bridgelabz.employeepayrollapp.dto.EmployeeDTO;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -10,27 +11,34 @@ class EmployeePayrollController {
         return "Employee Payroll REST API is working!";
     }
 
-    @GetMapping
-    public String getEmployye(){
-        return "Fetching employee";
+
+    // GET request - Fetching employee with given id
+    @GetMapping("id/{id}")
+    public String getEmployye(@PathVariable Long id){
+        return "Fetching employee with id " + id;
     }
 
+    // GET request - fetching all employees
     @GetMapping("/all")
     public String getAllEmployye(){
         return "Fetching all employees";
     }
 
-    @PostMapping()
-    public String addEmployee() {
-        return "Employee added!";
+    // POST request - Adding employee
+    @PostMapping
+    public EmployeeDTO addEmployee(@RequestBody EmployeeDTO employee) {
+        return new EmployeeDTO(employee.getName(), employee.getSalary());
     }
 
-    @PutMapping("/update")
+
+    // PUT request - updating employee data
+    @PutMapping("id/{id}")
     public String updateEmployee() {
         return "Employee updated!";
     }
 
-    @DeleteMapping("/delete")
+    // DELETE request - Removing employee
+    @DeleteMapping("id/{id}")
     public String deleteEmployee() {
         return "Employee deleted!";
     }
