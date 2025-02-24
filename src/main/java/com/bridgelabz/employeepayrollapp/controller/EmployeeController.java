@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
@@ -20,25 +22,25 @@ public class EmployeeController {
 
     // GET - Fetching employee by ID
     @GetMapping("/id/{id}")
-    public ResponseEntity<String> getEmployee(@PathVariable Long id) {
+    public ResponseEntity<Employee> getEmployee(@PathVariable Long id) {
         return employeeService.getEmployeeById(id);
     }
 
     // GET - Fetching all employees
     @GetMapping("/all")
-    public ResponseEntity<String> getAllEmployees() {
+    public ResponseEntity<List<Employee>> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
 
     // POST - Adding an employee
     @PostMapping
-    public ResponseEntity<String> addEmployee(@RequestBody Employee employee) {
+    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
         return employeeService.addEmployee(employee);
     }
 
     // PUT - Updating employee data
     @PutMapping("/id/{id}")
-    public ResponseEntity<String> updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
         return employeeService.updateEmployee(id, employee);
     }
 
