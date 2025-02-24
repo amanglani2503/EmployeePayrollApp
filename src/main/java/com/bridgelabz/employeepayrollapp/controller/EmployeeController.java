@@ -1,45 +1,50 @@
 package com.bridgelabz.employeepayrollapp.controller;
 
-import com.bridgelabz.employeepayrollapp.dto.EmployeeDTO;
+import com.bridgelabz.employeepayrollapp.model.Employee;
+import com.bridgelabz.employeepayrollapp.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/employees")
-class EmployeePayrollController {
+public class EmployeeController {
+
+    @Autowired
+    private EmployeeService employeeService;
+
     @GetMapping("/test")
-    public String testAPI() {
-        return "Employee Payroll REST API is working!";
+    public ResponseEntity<String> testAPI() {
+        return ResponseEntity.ok("Employee Payroll REST API is working!");
     }
 
-
-    // GET request - Fetching employee with given id
-    @GetMapping("id/{id}")
-    public String getEmployye(@PathVariable Long id){
-        return "Fetching employee with id " + id;
+    // GET - Fetching employee by ID
+    @GetMapping("/id/{id}")
+    public ResponseEntity<String> getEmployee(@PathVariable Long id) {
+        return employeeService.getEmployeeById(id);
     }
 
-    // GET request - fetching all employees
+    // GET - Fetching all employees
     @GetMapping("/all")
-    public String getAllEmployye(){
-        return "Fetching all employees";
+    public ResponseEntity<String> getAllEmployees() {
+        return employeeService.getAllEmployees();
     }
 
-    // POST request - Adding employee
+    // POST - Adding an employee
     @PostMapping
-    public EmployeeDTO addEmployee(@RequestBody EmployeeDTO employee) {
-        return new EmployeeDTO(employee.getName(), employee.getSalary());
+    public ResponseEntity<String> addEmployee(@RequestBody Employee employee) {
+        return employeeService.addEmployee(employee);
     }
 
-
-    // PUT request - updating employee data
-    @PutMapping("id/{id}")
-    public String updateEmployee() {
-        return "Employee updated!";
+    // PUT - Updating employee data
+    @PutMapping("/id/{id}")
+    public ResponseEntity<String> updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
+        return employeeService.updateEmployee(id, employee);
     }
 
-    // DELETE request - Removing employee
-    @DeleteMapping("id/{id}")
-    public String deleteEmployee() {
-        return "Employee deleted!";
+    // DELETE - Removing employee data
+    @DeleteMapping("/id/{id}")
+    public ResponseEntity<String> deleteEmployee(@PathVariable Long id) {
+        return employeeService.deleteEmployee(id);
     }
 }
