@@ -1,14 +1,37 @@
 package com.bridgelabz.employeepayrollapp.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/employeepayrollservice")
-public class EmployeeController {
+@RequestMapping("/employees")
+class EmployeePayrollController {
+    @GetMapping("/test")
+    public String testAPI() {
+        return "Employee Payroll REST API is working!";
+    }
+
     @GetMapping
-    public String testEndpoint() {
-        return "Welcome to Employee Payroll App";
+    public String getEmployye(){
+        return "Fetching employee";
+    }
+
+    @GetMapping("/all")
+    public String getAllEmployye(){
+        return "Fetching all employees";
+    }
+
+    @PostMapping()
+    public String addEmployee() {
+        return "Employee added!";
+    }
+
+    @PutMapping("/update")
+    public String updateEmployee() {
+        return "Employee updated!";
+    }
+
+    @DeleteMapping("/delete")
+    public String deleteEmployee() {
+        return "Employee deleted!";
     }
 }
