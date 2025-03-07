@@ -10,6 +10,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/employees")
@@ -56,7 +58,10 @@ public class EmployeeController {
 
     // DELETE - Removing employee data
     @DeleteMapping("/id/{id}")
-    public ResponseEntity<String> deleteEmployee(@PathVariable Long id) {
-        return employeeService.deleteEmployee(id);
+    public ResponseEntity<Map<String, String>> deleteEmployee(@PathVariable Long id) {
+        employeeService.deleteEmployee(id);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Employee deleted successfully!");
+        return ResponseEntity.ok(response);
     }
 }
