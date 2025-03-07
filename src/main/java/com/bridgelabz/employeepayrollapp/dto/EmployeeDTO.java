@@ -1,10 +1,8 @@
 package com.bridgelabz.employeepayrollapp.dto;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Positive;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.*;
 import lombok.*;
-
 import java.util.List;
 
 @Getter
@@ -16,8 +14,8 @@ public class EmployeeDTO {
     @Pattern(regexp = "^[A-Z][a-zA-Z\\s]{2,}$", message = "Name must start with a capital letter and have at least 3 characters")
     private String name;
 
-    @NotEmpty(message = "Image path cannot be empty")
-    private String imagePath;
+    @NotBlank(message = "Profile picture cannot be empty")
+    private String profilePic;
 
     @NotEmpty(message = "Gender cannot be empty")
     @Pattern(regexp = "^(Male|Female|Other)$", message = "Gender must be Male, Female, or Other")
@@ -30,5 +28,9 @@ public class EmployeeDTO {
     private double salary;
 
     @NotEmpty(message = "Start date cannot be empty")
+    @JsonFormat(pattern = "dd MMM yyyy")
     private String startDate;
+
+    @NotBlank(message = "Note cannot be empty")
+    private String note;
 }

@@ -39,21 +39,15 @@ public class EmployeeController {
     }
 
     // POST - Adding an employee
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Employee> addEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) {
-        Employee employee = new Employee();
-        employee.setName(employeeDTO.getName());
-        employee.setSalary(employeeDTO.getSalary());
-        return employeeService.addEmployee(employee);
+        return employeeService.addEmployee(employeeDTO);
     }
 
     // PUT - Updating employee data
     @PutMapping("/id/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @Valid @RequestBody EmployeeDTO employeeDTO) {
-        Employee updatedEmployee = new Employee();
-        updatedEmployee.setName(employeeDTO.getName());
-        updatedEmployee.setSalary(employeeDTO.getSalary());
-        return employeeService.updateEmployee(id, updatedEmployee);
+        return employeeService.updateEmployee(id, employeeDTO);
     }
 
     // DELETE - Removing employee data
